@@ -2,6 +2,7 @@ package com.lattice.controller;
 
 import com.lattice.entity.TodoItem;
 import com.lattice.repository.TodoItemRepository;
+import com.lattice.repository.TodoListRepository;
 import com.lattice.service.TodoItemService;
 
 import org.json.simple.JSONObject;
@@ -21,6 +22,9 @@ public class TodoItemController {
     @Autowired
     TodoItemRepository itemRepository;
 
+    @Autowired
+    TodoListRepository listRepository;
+
     @GetMapping("/item/{itemId}")
     public TodoItem getItem(@PathVariable Long itemId) {
         return itemService.getItem(itemId);
@@ -30,11 +34,18 @@ public class TodoItemController {
     // New todo item
     @PostMapping(value = "/item")
     public ResponseEntity<String> newTodoItem(@RequestBody TodoItem item) {
-        TodoItem savedItem = itemService.saveTodoItem(item);
+
         JSONObject response = new JSONObject();
+        boolean exists = listRepository.existsTodoListByListId(item.getList().getListId());
+        if (!exists) {
+            response.put("message", "list doesn't exists");
+            return new ResponseEntity(response.toString(), HttpStatus.NOT_IMPLEMENTED);
+        }else {
+        TodoItem savedItem = itemService.saveTodoItem(item);
         response.put("message", "Item " + savedItem.getTaskName() + " created successfully");
         response.put("itemId", savedItem.getItemId());
         return ResponseEntity.ok(response.toString());
+        }
     }
 
     // Edit todo item
