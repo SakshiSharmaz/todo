@@ -32,7 +32,7 @@ public class TodoListController {
 
         JSONObject response = new JSONObject();
         boolean exists = listRepository.existsTodoListByTitle(list.getTitle());
-        if (!exists) {
+        if (exists) {
             response.put("message", "list with same name already exists");
             return new ResponseEntity(response.toString(), HttpStatus.NOT_IMPLEMENTED);
         } else {
