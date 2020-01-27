@@ -13,4 +13,6 @@ public interface TodoItemRepository extends JpaRepository<TodoItem, Long>
 {
     TodoItem findByItemId(Long itemId);
     List<TodoItem> findByListListId(long listId);
+    boolean existsTodoItemByItemId(long itemId);
+
 }

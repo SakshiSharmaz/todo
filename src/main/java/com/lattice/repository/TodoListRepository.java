@@ -14,4 +14,6 @@ public interface TodoListRepository extends JpaRepository<TodoList,Long> {
     @Query(value = "update todo_list set title = ?1 where list_id = ?2 ", nativeQuery = true)
     void updateListName(String name, long listId);
 
+    boolean existsTodoListByListId(long listId);
+
 }
