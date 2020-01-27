@@ -29,11 +29,19 @@ public class TodoListController {
 
     @PostMapping(value = "/list")
     public ResponseEntity<String> newList(@RequestBody TodoList list) {
-        TodoList createdList = listService.createList(list);
+
         JSONObject response = new JSONObject();
-        response.put("message", "list created successfully");
-        response.put("listId", createdList.getListId());
-        return ResponseEntity.ok(response.toString());
+        boolean exists = listRepository.existsTodoListByTitle(list.getTitle());
+        if (!exists) {
+            response.put("message", "list with same name already exists");
+            return new ResponseEntity(response.toString(), HttpStatus.NOT_IMPLEMENTED);
+        } else {
+
+            TodoList createdList = listService.createList(list);
+            response.put("message", "list created successfully");
+            response.put("listId", createdList.getListId());
+            return ResponseEntity.ok(response.toString());
+        }
     }
 
     @PutMapping("/list")

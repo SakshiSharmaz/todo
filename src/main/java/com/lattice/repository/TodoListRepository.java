@@ -15,5 +15,7 @@ public interface TodoListRepository extends JpaRepository<TodoList,Long> {
     void updateListName(String name, long listId);
 
     boolean existsTodoListByListId(long listId);
+    boolean existsTodoListByTitle(String name);
+
 
 }
