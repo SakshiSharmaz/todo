@@ -2,8 +2,8 @@ package com.lattice.controller;
 
 import com.lattice.entity.TodoItem;
 import com.lattice.service.TodoItemService;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class TodoItemController {
 
     // New todo item
     @PostMapping(value = "/item")
-    public ResponseEntity<String> newTodoItem(@RequestBody TodoItem item) throws JSONException {
+    public ResponseEntity<String> newTodoItem(@RequestBody TodoItem item) {
          TodoItem savedItem =  itemService.saveTodoItem(item);
         JSONObject response = new JSONObject();
         response.put("message", "Item " + savedItem.getTaskName() +   " created successfully");
@@ -35,7 +35,7 @@ public class TodoItemController {
 
     // Edit todo item
     @PutMapping("/item")
-    public ResponseEntity<String > editTodoItem(@RequestBody TodoItem item) throws JSONException {
+    public ResponseEntity<String > editTodoItem(@RequestBody TodoItem item){
         itemService.editTodoItem(item);
         JSONObject response = new JSONObject();
         response.put("message", "Item edited successfully");
@@ -44,7 +44,7 @@ public class TodoItemController {
 
     // Delete todo item
     @DeleteMapping("/item/{id}")
-    public ResponseEntity<String> deleteTodoItem(@PathVariable Long id) throws JSONException {
+    public ResponseEntity<String> deleteTodoItem(@PathVariable Long id){
         itemService.deleteTodoItem(id);
         JSONObject response = new JSONObject();
         response.put("message", "Item deleted successfully");
@@ -53,7 +53,7 @@ public class TodoItemController {
 
     // Change done state
     @PutMapping("/item/{id}")
-    public ResponseEntity<String> changeDoneState(@PathVariable Long id) throws JSONException {
+    public ResponseEntity<String> changeDoneState(@PathVariable Long id) {
         itemService.changeDoneStateForTodoItem(id);
         JSONObject response = new JSONObject();
         response.put("message", "Item marked as done");

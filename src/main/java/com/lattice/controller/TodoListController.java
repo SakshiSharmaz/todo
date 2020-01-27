@@ -7,9 +7,7 @@ import com.lattice.entity.TodoList;
 import com.lattice.repository.TodoListRepository;
 import com.lattice.service.TodoItemService;
 import com.lattice.service.TodoListService;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,7 @@ public class TodoListController {
     TodoListRepository listRepository;
 
     @PostMapping(value = "/list")
-    public ResponseEntity<String > newList(@RequestBody TodoList list) throws JSONException {
+    public ResponseEntity<String > newList(@RequestBody TodoList list) {
         TodoList createdList = listService.createList(list);
         JSONObject response = new JSONObject();
         response.put("message", "list created successfully");
@@ -38,7 +36,7 @@ public class TodoListController {
     }
 
     @PutMapping("/list")
-    public ResponseEntity<?> editList(@RequestBody TodoList list) throws JSONException {
+    public ResponseEntity<?> editList(@RequestBody TodoList list) {
         listService.editList(list);
         JSONObject response = new JSONObject();
         response.put("message", "list edited successfully");
@@ -46,7 +44,7 @@ public class TodoListController {
     }
 
     @DeleteMapping("/list/{id}")
-    public ResponseEntity<String> deleteList(@PathVariable Long id) throws JSONException {
+    public ResponseEntity<String> deleteList(@PathVariable Long id){
         listService.deleteList(id);
         JSONObject response = new JSONObject();
         response.put("message", "list deleted successfully");
