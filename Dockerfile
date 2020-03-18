@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:experimental
 FROM gradle:jdk8 as gradle
-RUN --mount=type=cache,id=gradle,target=/home/gradle/.gradle gradle build --no-daemon
+ENV DOCKER_BUILDKIT 1
+# RUN --mount=type=cache,id=gradle,target=/home/gradle/.gradle gradle build --no-daemon
 COPY build.gradle /final/
 COPY settings.gradle /final/
 
