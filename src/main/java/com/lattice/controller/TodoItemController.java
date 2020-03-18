@@ -38,7 +38,7 @@ public class TodoItemController {
         JSONObject response = new JSONObject();
         boolean exists = listRepository.existsTodoListByListId(item.getList().getListId());
         if (!exists) {
-            response.put("message", "list doesn't exists");
+            response.put("message", "list doesn't exists on server");
             return new ResponseEntity(response.toString(), HttpStatus.NOT_IMPLEMENTED);
         }else {
         TodoItem savedItem = itemService.saveTodoItem(item);
