@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.2.4.RELEASE'
+		springBootVersion = '2.4.1'
 	}
 	repositories {
 		mavenCentral()
@@ -12,7 +12,7 @@ buildscript {
 }
 plugins {
 	id 'org.springframework.boot' version '2.4.1'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
 dependencies {
@@ -34,9 +34,11 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 // https://mvnrepository.com/artifact/com.h2database/h2
